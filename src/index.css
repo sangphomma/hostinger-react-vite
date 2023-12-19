@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Anuphan:wght@100;200;300;400;500;600;700&family=Athiti:wght@200;300;400;500;600;700&family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Charm:wght@400;700&family=Charmonman:wght@400;700&family=Chonburi&family=IBM+Plex+Sans+Thai+Looped:wght@100;200;300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&family=Itim&family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,700;1,800;1,900&family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Maitree:wght@200;300;400;500;600;700&family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Mitr:wght@200;300;400;500;600;700&family=Noto+Sans+Thai+Looped:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+Thai:wght@100;200;300;400;500;600;700;800;900&family=Noto+Serif+Thai:wght@100;200;300;400;500;600;700;800;900&family=Nunito:wght@400;900&family=Pattaya&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,700;1,800;1,900&family=Pridi:wght@200;300;400;500;600;700&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Sriracha&family=Srisakdi:wght@400;700&family=Taviraj:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Thasadith:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --Primary: #ce0809;
+  --PrimaryTwo: #f2333b;
+  --Fill: #ffdd3e;
+  --Accent: #308ae4;
+  --AccentTwo: #56abec;
+}
+
+@layer base {
+  body {
+    @apply font-Sarabun font-normal bg-gray-100 flex justify-center;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white text-gray-700 w-72 min-h-[10rem] shadow-2xl rounded-md overflow-hidden;
+  }
+
+  .badge {
+    @apply px-3 py-1 rounded-full text-xs bg-slate-200;
+  }
+  .product-title {
+    @apply font-semibold text-2xl overflow-ellipsis overflow-hidden whitespace-nowrap;
+  }
+  .discount-percent {
+    @apply bg-green-400 py-0.5 px-1.5 rounded-md text-xs text-white;
+  }
+  .button-primary {
+    @apply bg-yellow-500/80 hover:bg-yellow-500/90 px-6 py-2 
+      rounded-md text-white font-medium tracking-wider transition;
+  }
+  .button-icon {
+    @apply flex flex-grow justify-center items-center bg-gray-300/60 hover:bg-gray-300/80 rounded-md transition;
+  }
+}
+
+@layer components {
+  .pagination {
+    @apply flex gap-2 justify-center items-center sm:flex-wrap;
+  }
+  .page-num {
+    @apply py-2 px-4 bg-slate-100 hover:bg-slate-200 hover:text-blue-800 rounded-md shadow-md;
+  }
+  .actived {
+    @apply bg-slate-700 text-slate-50;
+  }
+}
