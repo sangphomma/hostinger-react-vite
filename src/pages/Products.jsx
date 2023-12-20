@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 import IconsPage from "../components/IconsPage";
+import axios from "axios";
 
 const Products = () => {
+  const BASE_URL = "https://info-of.com";
   const [products, setProducts] = useState([]);
   const itemPerPage = 10;
   const [itemsOffSet, setItemOffSet] = useState(0);
@@ -11,7 +13,8 @@ const Products = () => {
   const currentItems = products.slice(itemsOffSet, endOffSet);
   //console.log(currentItems);
   const pageCount = Math.ceil(products.length / itemPerPage);
-  console.log(pageCount);
+  // //console.log(pageCount);
+  const [loading, setLoading] = useState(false);
 
   const handlePageClick = (e) => {
     console.log("you clik on .page." + e.selected);
@@ -21,19 +24,21 @@ const Products = () => {
   };
 
   useEffect(() => {
-    productsGet();
+    fetchProducts();
   }, []);
 
-  const url = "http://127.0.0.1:8000/api/v2/products";
-  const url2 = "http://127.0.0.1:8000/api/v1/tasks/";
-  const productsGet = async () => {
-    await fetch(`${import.meta.env.VITE_API_URL}/v1/tasks/`)
-      .then((response) => response.json())
-      .then((json) => {
-        setProducts(json.data);
-        //console.log(products);
-        //console.log(products);
-      });
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`${BASE_URL}/api/v1/todos`);
+      //console.log(BASE_URL);
+      setProducts(res.data.data);
+      //console.log(products);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,6 +50,7 @@ const Products = () => {
       <div className="mt-[120px] py-2 px-4 border-b-8 border-gray-400 bg-white ">
         <h1>รายชื่อจังหวัดของประเทศไทยเรียงตามพื้นที่</h1>
       </div>
+
       <div className="flex-1 md:flex  justify-between my-2 py-2 px-4 text-gray-600 text-xs font-normal leading-5  bg-white ">
         <div className="h-full w-[98%] md:w-[65%]">
           <div className="w-full aspect-square bg-slate-200 rounded flex flex-col gap-1">
@@ -54,11 +60,24 @@ const Products = () => {
                   key={index}
                   className="flex p-2 bg-slate-50 text-gray-600 rounded"
                 >
-                  <div className="w-[80px] h-[80px] bg-slate-300 p-1 mr-2 rounded-sm flex-shrink-0">
-                    <img
-                      src={"http://127.0.0.1:8000/storage/" + product.cover}
+                  <div className="flex gap-1 rounded-sm flex-shrink-0">
+                    {/* <img
+                      src={"http://info-of.com/storage/" + product.images[0]}
                       className="object-cover w-full"
-                    />
+                    /> */}
+                    {product.images?.length > 0
+                      ? product.images.map((img, index) => (
+                          <div
+                            key={index}
+                            className="w-[80px] h-[80px] bg-slate-300 p-1 mr-2"
+                          >
+                            <img
+                              src={`${BASE_URL}/storage/${img}`}
+                              className="object-cover h-full w-full rounded mr-2"
+                            />
+                          </div>
+                        ))
+                      : ""}
                   </div>
                   <span className="bg-sky-100 px-2 py-1 rounded">
                     <Link to={`/products/${product.id}/show`}>
