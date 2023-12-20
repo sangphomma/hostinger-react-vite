@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IconsPage from "../components/IconsPage";
 import axios from "axios";
 
@@ -39,6 +39,12 @@ const Products = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const navigate = useNavigate();
+  const useLink = (item) => {
+    //console.log(item);
+    navigate(`/products/${item.id}/show`, { state: item });
   };
 
   return (
@@ -80,9 +86,21 @@ const Products = () => {
                       : ""}
                   </div>
                   <span className="bg-sky-100 px-2 py-1 rounded">
-                    <Link to={`/products/${product.id}/show`}>
+                    <Link
+                      to={{
+                        pathname: `/products/${product.id}/show`,
+                        state: { korn: "Korn S" },
+                      }}
+                    >
                       {product.name}
                     </Link>
+
+                    <div
+                      onClick={() => useLink(product)}
+                      className="bg-sky-100 px-2 py-1 rounded cursor-pointer text-red-500"
+                    >
+                      {product.name}
+                    </div>
                   </span>
                 </div>
               );
